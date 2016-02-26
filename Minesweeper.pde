@@ -1,9 +1,8 @@
-
-
 import de.bezier.guido.*;
-//Declare and initialize NUM_ROWS and NUM_COLS = 20
+private int NUM_ROWS = 20;
+private int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
-private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
+private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 
 void setup ()
 {
@@ -14,14 +13,27 @@ void setup ()
     Interactive.make( this );
     
     //your code to declare and initialize buttons goes here
+    buttons = new MSButton[NUM_ROWS][NUM_COLS];
+    for(int i = 0; i < NUM_ROWS; i++) {
+        for(int j = 0; j < NUM_COLS; j++) {
+            buttons[i][j] = new MSButton(i, j);
+        }
+    }
+
     
     
-    
-    setBombs();
+    setBombs(133);
 }
-public void setBombs()
+public void setBombs(int mines)
 {
-    //your code
+    int rB;
+    int cB;
+    for(int i = 0; i < mines; i++) {
+        rB = (int)(Math.random()*NUM_ROWS);
+        cB = (int)(Math.random()*NUM_COLS);
+        if(!bombs.contains(buttons[rB][cB]))
+            bombs.add(buttons[rB][cB]);
+    }
 }
 
 public void draw ()
@@ -53,8 +65,8 @@ public class MSButton
     
     public MSButton ( int rr, int cc )
     {
-        // width = 400/NUM_COLS;
-        // height = 400/NUM_ROWS;
+        width = 400/NUM_COLS;
+        height = 400/NUM_ROWS;
         r = rr;
         c = cc; 
         x = c*width;
@@ -83,8 +95,8 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && bombs.contains(this) ) 
+            fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
@@ -100,16 +112,18 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        //your code here
-        return false;
+        if(r < 0 || r > NUM_ROWS || c < 0 || c > NUM_COLS)
+            return false;
+        return true;
     }
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        //your code here
+        if(isValid(bombs[row-1][col]) && bombs.cotains(button[row-1][col]))
+            numBombs++;
+        if(isValid(bombs[row][col-1]) && bombs.cotains(button[row][col-1]))
+            numBombs++;
+
         return numBombs;
     }
 }
-
-
-
