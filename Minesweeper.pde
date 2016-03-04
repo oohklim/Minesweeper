@@ -1,3 +1,5 @@
+
+
 import de.bezier.guido.*;
 private int NUM_ROWS = 20;
 private int NUM_COLS = 20;
@@ -22,7 +24,7 @@ void setup ()
 
     
     
-    setBombs(133);
+    setBombs(1);
 }
 public void setBombs(int mines)
 {
@@ -44,16 +46,32 @@ public void draw ()
 }
 public boolean isWon()
 {
-    //your code here
-    return false;
+    for(int i = 0; i < NUM_ROWS; i++) {
+        for(int j = 0; j < NUM_COLS; j++) {
+            if(!bombs.contains(buttons[i][j]) && !buttons[i][j].isClicked())
+                return false;
+        }
+    }
+    return true;
 }
 public void displayLosingMessage()
 {
-    //your code here
+    for(int i = 0; i < NUM_ROWS; i++) {
+        for(int j = 0; j < NUM_COLS; j++) {
+            if(bombs.contains(buttons[i][j]) && !buttons[i][j].isClicked())
+                buttons[i][j].mousePressed();
+        }
+    }
 }
 public void displayWinningMessage()
 {
-    //your code here
+    String wM = "You Win";
+    // if(isWon())
+    //     int temp = 0;
+    //     for(int i = NUM_COLS/2 - temp; i < NUM_COLS/2 + temp; i++) {
+    //         buttons[NUM_ROWS/2][i].setLabel(wM[temp]);
+    //         temp++;
+    //     }
 }
 
 public class MSButton
@@ -87,10 +105,25 @@ public class MSButton
     
     public void mousePressed () 
     {
-        clicked = true;
-        //your code here
+        if(mouseButton == LEFT && marked == false)
+            clicked = true;
+        if(mouseButton == RIGHT && clicked == false)
+            marked = !marked;
+        else if(bombs.contains(this))
+            displayLosingMessage();
+        else if(countBombs(r,c) > 0) {
+            if(marked == false)
+                label = String.valueOf(countBombs(r,c));
+        }
+        else {
+            for(int i = -1; i < 2; i++) {
+                for(int j = -1; j < 2; j++) {
+                    if(isValid(r+i, c+j) && !buttons[r+i][c+j].clicked)
+                        buttons[r+i][c+j].mousePressed();
+                }
+            }
+        }
     }
-
     public void draw () 
     {    
         if (marked)
@@ -112,18 +145,32 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        if(r < 0 || r > NUM_ROWS || c < 0 || c > NUM_COLS)
+        if(r < 0 || r >= NUM_ROWS || c < 0 || c >= NUM_COLS)
             return false;
         return true;
     }
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        if(isValid(bombs[row-1][col]) && bombs.cotains(button[row-1][col]))
+        if(isValid(row-1, col) && bombs.contains(buttons[row-1][col]))
             numBombs++;
-        if(isValid(bombs[row][col-1]) && bombs.cotains(button[row][col-1]))
+        if(isValid(row, col-1) && bombs.contains(buttons[row][col-1]))
             numBombs++;
-
+        if(isValid(row, col+1) && bombs.contains(buttons[row][col+1]))
+            numBombs++;
+        if(isValid(row+1, col) && bombs.contains(buttons[row+1][col]))
+            numBombs++;
+        if(isValid(row-1, col-1) && bombs.contains(buttons[row-1][col-1]))
+            numBombs++;
+        if(isValid(row+1, col+1) && bombs.contains(buttons[row+1][col+1]))
+            numBombs++;
+        if(isValid(row-1, col+1) && bombs.contains(buttons[row-1][col+1]))
+            numBombs++;
+        if(isValid(row+1, col-1) && bombs.contains(buttons[row+1][col-1]))
+            numBombs++;
         return numBombs;
     }
 }
+
+
+
