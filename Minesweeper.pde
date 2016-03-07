@@ -16,7 +16,7 @@ void setup ()
             buttons[i][j] = new MSButton(i, j);
         }
     }
-    setBombs(25);
+    setBombs(1);
 }
 public void setBombs(int mines)
 {
@@ -112,21 +112,23 @@ public class MSButton
     // called by manager
     public void mousePressed() 
     {
-        if(mouseButton == LEFT && marked == false)
-            clicked = true;
-        if(mouseButton == RIGHT && clicked == false)
-            marked = !marked;
-        else if(bombs.contains(this) && marked == false)
-            displayLosingMessage();
-        else if(countBombs(r,c) > 0) {
-            if(marked == false && gameOver == false)
-                label = "" + countBombs(r,c);
-        }
-        else {
-            for(int i = -1; i < 2; i++) {
-                for(int j = -1; j < 2; j++) {
-                    if(isValid(r+i, c+j) && !buttons[r+i][c+j].clicked)
-                        buttons[r+i][c+j].mousePressed();
+        if(gameOver == false) {
+            if(mouseButton == LEFT && marked == false)
+                clicked = true;
+            if(mouseButton == RIGHT && clicked == false)
+                marked = !marked;
+            else if(bombs.contains(this) && marked == false)
+                displayLosingMessage();
+            else if(countBombs(r,c) > 0) {
+                if(marked == false && gameOver == false)
+                    label = "" + countBombs(r,c);
+            }
+            else {
+                for(int i = -1; i < 2; i++) {
+                    for(int j = -1; j < 2; j++) {
+                        if(isValid(r+i, c+j) && !buttons[r+i][c+j].clicked)
+                            buttons[r+i][c+j].mousePressed();
+                    }
                 }
             }
         }
