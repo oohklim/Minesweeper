@@ -16,7 +16,7 @@ void setup ()
             buttons[i][j] = new MSButton(i, j);
         }
     }
-    setBombs(1);
+    setBombs(25);
 }
 public void setBombs(int mines)
 {
