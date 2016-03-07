@@ -68,8 +68,9 @@ public void displayLosingMessage()
 {
     for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < NUM_COLS; j++) {
-            buttons[i][j].reset();
-            buttons[i][j].mousePressed();
+            if(!buttons[i][j].isClicked())
+                buttons[i][j].mousePressed();
+            buttons[i][j].setLabel("");
         }
         displayMessage("You Lose", i);
     }
