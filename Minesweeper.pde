@@ -68,9 +68,10 @@ public void displayLosingMessage()
 {
     for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < NUM_COLS; j++) {
+            buttons[i][j].unMark();
+            buttons[i][j].setLabel("");
             if(!buttons[i][j].isClicked())
                 buttons[i][j].mousePressed();
-            buttons[i][j].setLabel("");
         }
         displayMessage("You Lose", i);
     }
@@ -175,5 +176,9 @@ public class MSButton
         clicked = false;
         marked = false;
         label = "";
+    }
+    public void unMark()
+    {
+      marked = false;
     }
 }
