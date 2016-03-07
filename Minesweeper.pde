@@ -112,11 +112,11 @@ public class MSButton
     // called by manager
     public void mousePressed() 
     {
-        if(mouseButton == LEFT && !marked)
+        if(mouseButton == LEFT && marked == false)
             clicked = true;
-        if(mouseButton == RIGHT && !clicked)
+        if(mouseButton == RIGHT && clicked == false)
             marked = !marked;
-        else if(bombs.contains(this))
+        else if(bombs.contains(this) && marked == false)
             displayLosingMessage();
         else if(countBombs(r,c) > 0) {
             if(marked == false && gameOver == false)
