@@ -52,7 +52,7 @@ public void restart()
             buttons[i][j].reset();
         }
     }
-    setBombs(25); 
+    setBombs(40); 
 }
 public boolean isWon()
 {
@@ -68,10 +68,7 @@ public void displayLosingMessage()
 {
     for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < NUM_COLS; j++) {
-            buttons[i][j].unMark();
-            buttons[i][j].setLabel("");
-            if(!buttons[i][j].isClicked())
-                buttons[i][j].mousePressed();
+            buttons[i][j].lost();
         }
         displayMessage("You Lose", i);
     }
@@ -177,8 +174,10 @@ public class MSButton
         marked = false;
         label = "";
     }
-    public void unMark()
+    public void lost()
     {
-      marked = false;
+        marked = false;
+        clicked = true;
+        label = "";
     }
 }
