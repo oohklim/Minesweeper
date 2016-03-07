@@ -16,7 +16,7 @@ void setup ()
             buttons[i][j] = new MSButton(i, j);
         }
     }
-    setBombs(50);
+    setBombs(25);
 }
 public void setBombs(int mines)
 {
@@ -50,7 +50,7 @@ public void restart()
             buttons[i][j].reset();
         }
     }
-    setBombs(50); 
+    setBombs(25); 
 }
 public boolean isWon()
 {
