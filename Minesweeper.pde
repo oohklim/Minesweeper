@@ -8,6 +8,7 @@ void setup ()
 {
     size(400, 400);
     textAlign(CENTER,CENTER);
+    colorMode(HSB, 100);
     Interactive.make( this );  // make the manager
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
     for(int i = 0; i < NUM_ROWS; i++) {
@@ -65,7 +66,7 @@ public void displayLosingMessage()
 {
     for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < NUM_COLS; j++) {
-            if(bombs.contains(buttons[i][j]) && !buttons[i][j].isClicked())
+            if(!buttons[i][j].isClicked())
                 buttons[i][j].mousePressed();
             buttons[i][j].setLabel("");
         }
@@ -135,11 +136,11 @@ public class MSButton
         if (marked)
             fill(0);
         else if(clicked && bombs.contains(this)) 
-            fill(255,0,0);
+            fill(0,70,90);
         else if(clicked)
-            fill( 200 );
+            fill(0, 0, 90);
         else 
-            fill( 100 );
+            fill(0, 0, 60);
         rect(x, y, width, height);
         fill(0);
         text(label,x+width/2,y+height/2);
