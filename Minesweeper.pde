@@ -33,8 +33,10 @@ public void setBombs(int mines)
 public void draw ()
 {
     background( 0 );
-    if(isWon() && gameOver == false)
+    if(isWon() && gameOver == false) {
         displayMessage("You Won!", NUM_ROWS/2);
+        gameOver = true;
+    }        
     if(gameOver == true) {
         if(keyPressed && key == 'r') {
             restart();
@@ -72,6 +74,7 @@ public void displayLosingMessage()
         }
         displayMessage("You Lose", i);
     }
+    gameOver = true;
 }
 public void displayMessage(String str, int row)
 {
@@ -80,7 +83,6 @@ public void displayMessage(String str, int row)
         buttons[row][i].setLabel(str.substring(index, index + 1));
         index++;
     }
-    gameOver = true;
 }
 
 public class MSButton
