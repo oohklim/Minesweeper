@@ -79,7 +79,7 @@ public void displayLosingMessage()
         else if(i == NUM_ROWS/2)
             displayMessage("PRESS R TO TRY AGAIN", i);
         else
-            displayMessage("You Lose", i);
+            displayMessage("YOU LOSE", i);
     }
     gameOver = true;
 }
