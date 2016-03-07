@@ -4,6 +4,7 @@ private int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 private boolean gameOver = false;
+private int NUM_BOMBS = 20;
 void setup ()
 {
     size(400, 400);
@@ -16,7 +17,7 @@ void setup ()
             buttons[i][j] = new MSButton(i, j);
         }
     }
-    setBombs(25);
+    setBombs(NUM_BOMBS);
 }
 public void setBombs(int mines)
 {
@@ -34,8 +35,11 @@ public void draw ()
 {
     background( 0 );
     if(isWon() && gameOver == false) {
-        displayMessage("You Won!", NUM_ROWS/2);
+        displayMessage("YOU WON!", NUM_ROWS/2 - 1);
+        displayMessage("PRESS R TO RESTART", NUM_ROWS/2);
+        displayMessage("MORE BOMBS THIS TIME", NUM_ROWS/2 + 1);
         gameOver = true;
+        NUM_BOMBS += 10;
     }        
     if(gameOver == true) {
         if(keyPressed && key == 'r') {
@@ -52,7 +56,7 @@ public void restart()
             buttons[i][j].reset();
         }
     }
-    setBombs(40); 
+    setBombs(NUM_BOMBS); 
 }
 public boolean isWon()
 {
@@ -73,7 +77,7 @@ public void displayLosingMessage()
         if(i == NUM_ROWS/2 - 1)
             displayMessage("GAME OVER!", i);
         else if(i == NUM_ROWS/2)
-            displayMessage("YOU ARE A LOSER!", i);
+            displayMessage("PRESS R TO TRY AGAIN", i);
         else
             displayMessage("You Lose", i);
     }
