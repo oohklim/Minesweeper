@@ -120,7 +120,7 @@ public class MSButton
             displayLosingMessage();
         else if(countBombs(r,c) > 0) {
             if(marked == false && gameOver == false)
-                label = String.valueOf(countBombs(r,c));
+                label = "" + countBombs(r,c);
         }
         else {
             for(int i = -1; i < 2; i++) {
