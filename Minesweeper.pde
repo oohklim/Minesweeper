@@ -70,14 +70,20 @@ public void displayLosingMessage()
         for(int j = 0; j < NUM_COLS; j++) {
             buttons[i][j].lost();
         }
-        displayMessage("You Lose", i);
+        if(i == NUM_ROWS/2 - 1)
+            displayMessage("GAME OVER!", i);
+        else if(i == NUM_ROWS/2)
+            displayMessage("YOU ARE A LOSER!", i);
+        else
+            displayMessage("You Lose", i);
     }
     gameOver = true;
 }
 public void displayMessage(String str, int row)
 {
     int index = 0;
-    for(int i = NUM_COLS/2 - str.length()/2; i < NUM_COLS/2 + str.length()/2; i++) {
+    String sH = str.substring(str.length()/2);
+    for(int i = NUM_COLS/2 - str.length()/2; i < NUM_COLS/2 + sH.length(); i++) {
         buttons[row][i].setLabel(str.substring(index, index + 1));
         index++;
     }
