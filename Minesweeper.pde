@@ -23,7 +23,7 @@ public void setBombs(int mines)
 {
     int rB;
     int cB;
-    for(int i = 0; i < mines; i++) {
+    while(bombs.size() < mines) {
         rB = (int)(Math.random()*NUM_ROWS);
         cB = (int)(Math.random()*NUM_COLS);
         if(!bombs.contains(buttons[rB][cB]))
@@ -35,16 +35,25 @@ public void draw ()
 {
     background( 0 );
     if(isWon() && gameOver == false) {
-        displayMessage("YOU WON!", NUM_ROWS/2 - 1);
-        displayMessage("PRESS R TO RESTART", NUM_ROWS/2);
-        displayMessage("MORE BOMBS THIS TIME", NUM_ROWS/2 + 1);
         gameOver = true;
         NUM_BOMBS += 10;
-    }        
-    if(gameOver == true) {
-        if(keyPressed && key == 'r') {
-            restart();
+        if(NUM_BOMBS >= 400) {
+            displayMessage("THANK YOU", NUM_ROWS/2 - 1);
+            displayMessage("FOR", NUM_ROWS/2);
+            displayMessage("PLAYING!", NUM_ROWS/2 + 1);
+        } else {
+            displayMessage("YOU WON!", NUM_ROWS/2 - 1);
+            displayMessage("PRESS R TO RESTART", NUM_ROWS/2);
+            displayMessage("MORE BOMBS THIS TIME", NUM_ROWS/2 + 1);
         }
+    }        
+    if(gameOver == true && NUM_BOMBS < 400 && keyPressed) {
+        if(key == 'r')
+            restart();
+        if(key == 'p')
+            NUM_BOMBS = 399;
+        if(key == 'o')
+            NUM_BOMBS = 20;
     }
 }
 public void restart()
