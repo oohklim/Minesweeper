@@ -36,6 +36,11 @@ public void draw ()
     background( 0 );
     if(isWon() && gameOver == false) {
         gameOver = true;
+        for(int i = 0; i < NUM_ROWS; i++) {
+            for(int j = 0; j < NUM_COLS; j++) {
+                buttons[i][j].game();
+            }
+        }
         NUM_BOMBS += 10;
         if(NUM_BOMBS >= 400) {
             displayMessage("THANK YOU", NUM_ROWS/2 - 1);
@@ -81,7 +86,7 @@ public void displayLosingMessage()
 {
     for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < NUM_COLS; j++) {
-            buttons[i][j].lost();
+            buttons[i][j].game();
         }
         if(i == NUM_ROWS/2 - 1)
             displayMessage("GAME OVER!", i);
@@ -193,7 +198,7 @@ public class MSButton
         marked = false;
         label = "";
     }
-    public void lost()
+    public void game()
     {
         marked = false;
         clicked = true;
