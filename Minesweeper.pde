@@ -52,7 +52,7 @@ public void draw ()
             restart();
         if(key == 'p')
             NUM_BOMBS = 399;
-        if(key == 'o')
+        if(key == 'i')
             NUM_BOMBS = 20;
     }
 }
