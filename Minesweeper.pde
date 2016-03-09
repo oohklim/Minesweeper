@@ -43,7 +43,7 @@ public void draw ()
         }
         NUM_BOMBS += 10;
         if(NUM_BOMBS >= 400) {
-            displayMessage("THANK YOU", NUM_ROWS/2 - 1);
+            displayMessage("THANKS", NUM_ROWS/2 - 1);
             displayMessage("FOR", NUM_ROWS/2);
             displayMessage("PLAYING!", NUM_ROWS/2 + 1);
         } else {
