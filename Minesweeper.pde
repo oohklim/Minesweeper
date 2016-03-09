@@ -4,7 +4,7 @@ private int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 private boolean gameOver = false;
-private int NUM_BOMBS = 10;
+private int NUM_BOMBS = 20;
 private int bHue = 0;
 void setup ()
 {
