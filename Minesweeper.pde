@@ -4,7 +4,8 @@ private int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 private boolean gameOver = false;
-private int NUM_BOMBS = 20;
+private int NUM_BOMBS = 10;
+private int bHue = 0;
 void setup ()
 {
     size(400, 400);
@@ -33,9 +34,10 @@ public void setBombs(int mines)
 
 public void draw ()
 {
-    background( 0 );
+    background(0);
     if(isWon() && gameOver == false) {
         gameOver = true;
+        bHue = 60;
         for(int i = 0; i < NUM_ROWS; i++) {
             for(int j = 0; j < NUM_COLS; j++) {
                 buttons[i][j].game();
@@ -64,6 +66,7 @@ public void draw ()
 public void restart()
 {
     gameOver = false;
+    bHue = 0;
     bombs.clear();
     for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < NUM_COLS; j++) {
@@ -162,7 +165,7 @@ public class MSButton
         if (marked)
             fill(0);
         else if(clicked && bombs.contains(this)) 
-            fill(0,70,90);
+            fill(bHue,70,90);
         else if(clicked)
             fill(0, 0, 90);
         else 
